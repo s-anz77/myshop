@@ -127,4 +127,10 @@ export default {
         margin-bottom: 30px;
     }
 }
+
+@media (max-width:480px) {
+    .items .item {
+        zoom: 0.7;
+    }
+}
 </style>
