@@ -14,20 +14,28 @@ export default {
     },
 
     methods: {
-        editData(slug) {
-            if (this.title == '' || this.image == '' || this.description == '' || this.price == '')
-            this.error = 'Заполните все поля';
-            else {
+        async editData() {
+            if (this.title == '' || this.image == '' || this.description == '' || this.price == '') {
+                this.error = 'Заполните все поля';
+                return;
+            }
+
             this.error = '';
+            const slug = this.item.slug;
             const newData = {
-                slug: slug,
+                slug,
                 title: this.title,
+                image: this.image,
                 description: this.description,
                 price: this.price,
-                };
+            };
 
-                axios.put(`https://anzore-shop-api.up.railway.app/api/edit/${slug}/`, newData)
-                    .then(response => console.log(response.data.result));
+            try {
+                const response = await axios.put(`https://anzore-shop-api.up.railway.app/api/edit/${slug}/`, newData);
+                this.error = response.data.result;
+            } catch (error) {
+                this.error = error.response?.data?.result || 'Не удалось сохранить изменения';
+                console.error('Ошибка при редактировании товара:', error);
             }
         }
     }
@@ -36,12 +44,12 @@ export default {
 
 <template>
     <div>
-        <form>
+        <form @submit.prevent="editData">
             <p class="error">{{ error }}</p>
             <input type="text" v-model="title" placeholder="Наименование">
             <input type="text" v-model="description" placeholder="Описание">
             <input type="number" v-model="price" placeholder="Цена">
-            <button class='editBut' type="submit" @click="editData(this.item.slug)">Обновить</button>
+            <button class='editBut' type="submit">Обновить</button>
         </form>
     </div>
 </template>
