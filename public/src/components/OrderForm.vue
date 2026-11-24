@@ -102,6 +102,11 @@ h1 {
     font-size: 90px;
     text-align: center;
 }
+
+h2 {
+    text-align: center;
+}
+
 .item {
     display: flex;
     justify-content: space-between;
@@ -171,6 +176,53 @@ form button:hover {
 .error {
     margin-bottom: 10px;
     color: rgb(181, 46, 46);
+}
+
+@media (max-width:1050px) {
+    .data {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        margin: 50px 0;
+        gap: 50px;
+    }
+
+    .data > div {
+        width: 80%;
+    }
+
+    h1 {
+        margin-top: 50px;
+        font-weight: 400;
+        font-size: 70px;
+    }
+}
+
+@media (max-width:560px) {
+    h1 {
+        font-size: 60px;
+    }
+}
+
+@media (max-width:460px) {
+    h1 {
+        font-size: 50px;
+    }
+}
+
+@media (max-width:380px) {
+    .data > div {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    form input {
+        width: 250px;
+    }
 }
 
 </style>

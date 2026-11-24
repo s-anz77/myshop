@@ -114,4 +114,17 @@ export default {
 .editBut:hover {
     background: rgb(22, 94, 58);
 }
+
+@media (max-width: 1000px) {
+    .items {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .items .item {
+        margin-bottom: 30px;
+    }
+}
 </style>

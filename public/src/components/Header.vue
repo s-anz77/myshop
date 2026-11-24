@@ -13,11 +13,14 @@ export default {
 <template>
     <header>
         <img src="/img/logo.svg" alt="">
-        <ul>
+        <ul class="wideNavBar">
             <li><RouterLink to="/" active-class="active">Главная</RouterLink></li>
             <li><RouterLink to="/items" active-class="active">Товары</RouterLink></li>
             <li><RouterLink to="/shipping" active-class="active">Доставка</RouterLink></li>
             <li><RouterLink to="/about" active-class="active">Про нас</RouterLink></li>
+            <li><img src="/img/purchase.svg" alt="" @click="showBasket = !showBasket"></li>
+        </ul>
+        <ul class="hiddenNavBar">
             <li><img src="/img/purchase.svg" alt="" @click="showBasket = !showBasket"></li>
         </ul>
         <div class="basket" v-if="showBasket">
@@ -34,6 +37,12 @@ export default {
             </div>
         </div>
     </header>
+    <ul class="belowNavBar">
+            <li><RouterLink to="/" active-class="active">Главная</RouterLink></li>
+            <li><RouterLink to="/items" active-class="active">Товары</RouterLink></li>
+            <li><RouterLink to="/shipping" active-class="active">Доставка</RouterLink></li>
+            <li><RouterLink to="/about" active-class="active">Про нас</RouterLink></li>
+        </ul>
 </template>
 
 <style scoped>
@@ -107,23 +116,24 @@ header {
     align-items: center;
     margin-top: 50px;
     position: relative;
+    width: 100%;
 }
 
-header ul {
+ul {
     display: flex;
     gap: 25px;
     list-style: none;
     align-items: center;
 }
 
-header ul li a.active {
+ul li a.active {
     font-weight: bold;
     padding: 5px 15px;
     background-color: #B2BAC1;
     border-radius: 20px;
 }
 
-header ul li a.active:hover {
+ul li a.active:hover {
     color: #fff;
     background: #616569;
 }
@@ -136,5 +146,44 @@ header ul li a.active:hover {
 
 .remove-from-basket:hover {
     transform: scale(0.7);
+}
+
+.hiddenNavBar {
+    display: none;
+}
+
+.belowNavBar {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .wideNavBar {
+        display: none;
+    }
+
+    .hiddenNavBar {
+        display: block;
+    }
+
+    .belowNavBar {
+        display: flex;
+        margin-top: 10px;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 460px) {
+    .belowNavBar {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin-top: 50px;
+        justify-content: center;
+    }
+
+    .belowNavBar > li {
+        flex: 0 0 50%;
+        box-sizing: border-box;
+    }
 }
 </style>

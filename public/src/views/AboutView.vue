@@ -37,4 +37,11 @@ p a {
 p a:hover {
     color: #004e3a;
 }
+
+@media (max-width:700px) {
+    h1 {
+        font-size: 60px;
+        margin-top: 50px;
+    }
+}
 </style>
