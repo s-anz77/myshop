@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 export default {
-    props: ['basket', 'deleteFromBasket'],
+    props: ['basket', 'deleteFromBasket', "clearBasket"],
     data() {
         return {
             error: '',
@@ -19,10 +19,14 @@ export default {
     },
     methods: {
         sendData() {
-            if (this.basket.length == 0 || this.getSumma == 0)
+            if (this.basket.length == 0 || this.getSumma == 0) {
                 this.error = 'Ваша корзина пуста';
-            else if (this.name == '' || this.surname == '' || this.email == '' || this.phone == '')
+                return;
+            }
+            else if (this.name == '' || this.surname == '' || this.email == '' || this.phone == '') {
                 this.error = 'Заполните все поля';
+                return;
+            }
             else
                 this.error = '';
 
@@ -36,7 +40,17 @@ export default {
                 };
 
                 axios.post('https://anzore-shop-api.up.railway.app/api/order/', orderData)
-                    .then(response => this.error = response.data.result);
+                    .then(response => {
+                        this.error = response.data.result;
+                        if (response.data.result === "Заказ успешно оформлен!") {
+                            this.clearBasket();
+                            this.name = '';
+                            this.surname = '';
+                            this.email = '';
+                            this.phone = '';
+                        }
+                    }
+            );
         }
     }
 }

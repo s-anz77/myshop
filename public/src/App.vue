@@ -24,6 +24,10 @@ export default {
       this.basket = this.basket.filter((el) => el.slug !== slug);
       localStorage.setItem('basket', JSON.stringify(this.basket));
     },
+    clearBasket() {
+      this.basket = [];
+      localStorage.setItem('basket', JSON.stringify([]));
+    }
   },
   created() {
     if(this.basket.length == 0 && localStorage.getItem('basket') != null)
@@ -34,7 +38,7 @@ export default {
 
 <template>
   <div class="container">
-    <RouterView :basket="basket" :addToBasket="addToBasket" :deleteFromBasket="deleteFromBasket"/>
+    <RouterView :basket="basket" :addToBasket="addToBasket" :deleteFromBasket="deleteFromBasket" :clearBasket="clearBasket"/>
   </div>
 </template>
 
